@@ -1,0 +1,56 @@
+HELP.md
+target/
+!.mvn/wrapper/maven-wrapper.jar
+!**/src/main/**
+!**/src/test/**
+#!**Login**
+### STS ##
+.apt_generated
+.classpath
+.factorypath
+.project
+.settings
+.springBeans
+.sts4-cache
+.log
+
+### IntelliJ IDEA ###
+.idea
+*.iws
+*.iml
+*.ipr
+.mvn
+mvnw*
+
+### NetBeans ###
+/nbproject/private/
+/nbbuild/
+/dist/
+/nbdist/
+/.nb-gradle/
+build/
+
+### VS Code ###
+.vscode/
+
+### generated files ###
+bin/
+gen/
+
+### MAC ###
+.DS_Store
+
+### Other ###
+logs/
+temp/
+app/src/main/resources/application-local1.yml
+
+demo*.sql
+doc/**测试**
+doc/**文档**
+LOG_HOME_IS_UNDEFUNED/
+LOG_HOME_IS_UNDEFINED/appName_IS_UNDEFINED.log
+LOG_HOME_IS_UNDEFINED/appName_IS_UNDEFINED_all.log
+LOG_HOME_IS_UNDEFINED/appName_IS_UNDEFINED_error.log
+LOG_HOME_IS_UNDEFINED/appName_IS_UNDEFINED-2023-12-08-0.log
+LOG_HOME_IS_UNDEFINED/

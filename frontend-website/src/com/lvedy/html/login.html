@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="../CSS/first_h.css">
+    <link rel="stylesheet" href="../CSS/forms.css">
+    <title>用户登录 - 全网最猛贩猪人网站</title>
+</head>
+<body class="login-page">
+    <h1><span>用</span><span>户</span><span>登</span><span>录</span></h1>
+    
+    <div class="form-container">
+        <form id="loginForm">
+            <div class="form-group">
+                <label for="username">用户名:</label>
+                <input type="text" id="username" name="username" required>
+            </div>
+            
+            <div class="form-group">
+                <label for="password">密码:</label>
+                <input type="password" id="password" name="password" required>
+                <div class="forgot-password">
+                    <a href="#">忘记密码？</a>
+                </div>
+            </div>
+            
+            <button type="submit" class="submit-btn">登录</button>
+        </form>
+        
+        <div class="back-link">
+            <a href="first.html">返回首页</a> | 
+            <a href="register.html">没有账号？去注册</a>
+        </div>
+    </div>
+    
+    <script src="../JavaScript/login.js"></script>
+</body>
+</html>

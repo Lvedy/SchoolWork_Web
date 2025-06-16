@@ -1,0 +1,161 @@
+/* 表单容器样式 */
+.form-container {
+    background: rgba(255, 255, 255, 0.9);
+    padding: 40px;
+    border-radius: 15px;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.3);
+    max-width: 400px;
+    width: 90%;
+    margin: 20px auto;
+    box-sizing: border-box;
+}
+
+/* 确保表单页面可以滚动 */
+.register-page,
+.login-page {
+    min-height: 100vh;
+    overflow-y: auto;
+    padding: 20px 0;
+    box-sizing: border-box;
+}
+
+/* 表单组样式 */
+.form-group {
+    margin-bottom: 20px;
+}
+
+.form-group label {
+    display: block;
+    margin-bottom: 8px;
+    font-weight: bold;
+    color: #333;
+}
+
+.form-group input {
+    width: 100%;
+    padding: 12px;
+    border: 2px solid #ddd;
+    border-radius: 8px;
+    font-size: 16px;
+    box-sizing: border-box;
+}
+
+/* 注册页面输入框焦点样式 */
+.register-page .form-group input:focus {
+    border-color: #4CAF50;
+    outline: none;
+    box-shadow: 0 0 5px rgba(76, 175, 80, 0.3);
+}
+
+/* 登录页面输入框焦点样式 */
+.login-page .form-group input:focus {
+    border-color: #4CAF50;
+    outline: none;
+    box-shadow: 0 0 5px rgba(76, 175, 80, 0.3);
+}
+
+/* 提交按钮基础样式 */
+.submit-btn {
+    width: 100%;
+    padding: 15px;
+    color: white;
+    border: none;
+    border-radius: 8px;
+    font-size: 18px;
+    font-weight: bold;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+/* 注册页面提交按钮样式 */
+.register-page .submit-btn {
+    background: linear-gradient(135deg, #4CAF50, #45a049);
+    box-shadow: 0 4px 8px rgba(76, 175, 80, 0.3);
+}
+
+.register-page .submit-btn:hover {
+    background: linear-gradient(135deg, #45a049, #3d8b40);
+    box-shadow: 0 6px 12px rgba(76, 175, 80, 0.4);
+    transform: translateY(-2px);
+}
+
+/* 登录页面提交按钮样式 */
+.login-page .submit-btn {
+    background: linear-gradient(135deg, #4CAF50, #45a049);
+    box-shadow: 0 4px 8px rgba(76, 175, 80, 0.3);
+}
+
+.login-page .submit-btn:hover {
+    background: linear-gradient(135deg, #45a049, #3d8b40);
+    box-shadow: 0 6px 12px rgba(76, 175, 80, 0.4);
+    transform: translateY(-2px);
+}
+
+/* 返回链接样式 */
+.back-link {
+    text-align: center;
+    margin-top: 20px;
+}
+
+/* 注册页面链接样式 */
+.register-page .back-link a {
+    color: #4CAF50;
+    text-decoration: none;
+    font-weight: bold;
+}
+
+/* 登录页面链接样式 */
+.login-page .back-link a {
+    color: #4CAF50;
+    text-decoration: none;
+    font-weight: bold;
+}
+
+/* 忘记密码链接样式 */
+.forgot-password {
+    text-align: right;
+    margin-top: 10px;
+}
+
+.forgot-password a {
+    color: #666;
+    text-decoration: none;
+    font-size: 14px;
+}
+
+/* 链接悬停效果 */
+.back-link a:hover,
+.forgot-password a:hover {
+    text-decoration: underline;
+}
+
+/* 响应式设计 */
+@media (max-width: 768px) {
+    .form-container {
+        padding: 20px;
+        margin: 10px auto;
+        width: 95%;
+    }
+    
+    .register-page,
+    .login-page {
+        padding: 10px 0;
+    }
+    
+    h1 {
+        font-size: 8vw;
+        margin-bottom: 20px;
+    }
+}
+
+@media (max-height: 600px) {
+    .register-page,
+    .login-page {
+        justify-content: flex-start;
+        padding-top: 10px;
+    }
+    
+    .form-container {
+        margin: 10px auto;
+    }
+}

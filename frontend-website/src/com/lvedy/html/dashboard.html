@@ -1,0 +1,201 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>用户中心 - 全网最猛贩猪人网站</title>
+    <link rel="stylesheet" href="../CSS/dashboard.css">
+</head>
+<body>
+    <!-- 顶部导航栏 -->
+    <header class="header">
+        <div class="header-content">
+            <h1 class="logo">🐷 最猛贩猪人</h1>
+            <div class="user-info">
+                <span id="welcomeText">欢迎回来！</span>
+                <button id="logoutBtn" class="logout-btn">退出登录</button>
+            </div>
+        </div>
+    </header>
+
+    <!-- 主要内容区域 -->
+    <div class="main-container">
+        <!-- 侧边导航栏 -->
+        <nav class="sidebar">
+            <ul class="nav-menu">
+                <li class="nav-item active" data-module="profile">
+                    <span class="nav-icon">👤</span>
+                    <span class="nav-text">我的</span>
+                </li>
+                <li class="nav-item" data-module="products">
+                    <span class="nav-icon">🛍️</span>
+                    <span class="nav-text">产品</span>
+                </li>
+                <li class="nav-item" data-module="orders">
+                    <span class="nav-icon">📋</span>
+                    <span class="nav-text">订单</span>
+                </li>
+                <li class="nav-item" data-module="recommendations">
+                    <span class="nav-icon">⭐</span>
+                    <span class="nav-text">推荐</span>
+                </li>
+            </ul>
+        </nav>
+
+        <!-- 内容区域 -->
+        <main class="content">
+            <!-- 我的模块 -->
+            <div id="profile-module" class="module active">
+                <div class="module-header">
+                    <h2>我的信息</h2>
+                </div>
+                <div class="profile-content">
+                    <div class="profile-card">
+                        <div class="avatar">
+                            <span class="avatar-icon">🐷</span>
+                        </div>
+                        <div class="profile-info">
+                            <h3 id="userName">用户名</h3>
+                            <p id="userRole">最猛贩猪人</p>
+                            <p class="join-date">加入时间：<span id="joinDate">2024-01-01</span></p>
+                        </div>
+                    </div>
+                    <div class="profile-actions">
+                        <button class="action-btn danger" onclick="logout()">退出登录</button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 产品模块 -->
+            <div id="products-module" class="module">
+                <div class="module-header">
+                    <h2>产品中心</h2>
+                    <div class="module-tabs">
+                        <button class="tab-btn active" data-tab="product-list">产品列表</button>
+                        <button class="tab-btn" data-tab="product-detail">产品详情</button>
+                    </div>
+                </div>
+                <div class="module-content">
+                    <div id="product-list" class="tab-content active">
+                        <div class="product-search">
+                            <div class="search-form">
+                                <div class="search-row">
+                                    <input type="text" id="productSearchId" placeholder="产品ID">
+                                    <input type="text" id="productSearchName" placeholder="产品名称">
+                                </div>
+                                <div class="search-row">
+                                    <input type="number" id="startPrice" placeholder="起始价格" min="0" step="0.01">
+                                    <input type="number" id="endPrice" placeholder="终止价格" min="0" step="0.01">
+                                </div>
+                                <div class="search-actions">
+                                    <button class="btn-primary" onclick="searchProducts()">搜索产品</button>
+                                    <button class="btn-secondary" onclick="clearSearch()">清除搜索</button>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="product-grid">
+                            <!-- 产品列表将通过JavaScript动态生成 -->
+                        </div>
+                        <div class="pagination-container">
+                            <!-- 分页控件将通过JavaScript动态生成 -->
+                        </div>
+                    </div>
+                    <div id="product-detail" class="tab-content">
+                        <div class="product-detail-card">
+                            <h3>请从产品列表中选择产品查看详情</h3>
+                            <p>点击产品列表中的"查看详情"按钮来查看产品的详细信息。</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 订单模块 -->
+            <div id="orders-module" class="module">
+                <div class="module-header">
+                    <h2>订单管理</h2>
+                    <div class="module-tabs">
+                        <button class="tab-btn active" data-tab="order-list">订单列表</button>
+                        <button class="tab-btn" data-tab="create-order">创建订单</button>
+                    </div>
+                </div>
+                <div class="module-content">
+                    <div id="order-list" class="tab-content active">
+                        <div class="order-list">
+                            <div class="order-item">
+                                <div class="order-info">
+                                    <h4>订单 #001</h4>
+                                    <p>优质小猪 x1</p>
+                                    <p class="order-status pending">待处理</p>
+                                </div>
+                                <div class="order-actions">
+                                    <button class="btn-success" onclick="completeOrder('001')">完成</button>
+                                    <button class="btn-danger" onclick="deleteOrder('001')">删除</button>
+                                </div>
+                            </div>
+                            <div class="order-item">
+                                <div class="order-info">
+                                    <h4>订单 #002</h4>
+                                    <p>精品大猪 x1</p>
+                                    <p class="order-status completed">已完成</p>
+                                </div>
+                                <div class="order-actions">
+                                    <button class="btn-danger" onclick="deleteOrder('002')">删除</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div id="create-order" class="tab-content">
+                        <div class="create-order-form">
+                            <h3>创建新订单</h3>
+                            <form id="orderForm">
+                                <div class="form-group">
+                                    <label for="productId">产品ID：</label>
+                                    <input type="text" id="productId" placeholder="请输入产品ID" required>
+                                </div>
+                                <div class="form-group">
+                                    <label for="quantity">数量：</label>
+                                    <input type="number" id="quantity" min="1" value="1" required>
+                                </div>
+                                <div class="form-group">
+                                    <label for="address">收货地址：</label>
+                                    <textarea id="address" rows="3" placeholder="请输入收货地址（可选）"></textarea>
+                                </div>
+                                <button type="submit" class="btn-primary">创建订单</button>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 推荐模块 -->
+            <div id="recommendations-module" class="module">
+                <div class="module-header">
+                    <h2>为您推荐</h2>
+                </div>
+                <div class="recommendations-content">
+                    <div class="recommendation-card">
+                        <div class="rec-icon">🌟</div>
+                        <h3>猜你喜欢</h3>
+                        <p id="guess-you-like-content">为您推荐个性化商品，点击获取推荐！</p>
+                        <button class="btn-primary" onclick="getRecommendations()">获取推荐</button>
+                    </div>
+                    <div class="recommendation-card">
+                        <div class="rec-icon">🔥</div>
+                        <h3>热门推荐</h3>
+                        <p>精品大猪深受用户喜爱，品质保证！</p>
+                        <button class="btn-primary" onclick="showNotAvailable()">查看详情</button>
+                    </div>
+                    <div class="recommendation-card">
+                        <div class="rec-icon">💎</div>
+                        <h3>VIP专享</h3>
+                        <p>猪肉套餐VIP用户专享价，仅需¥188！</p>
+                        <button class="btn-primary" onclick="showNotAvailable()">立即抢购</button>
+                    </div>
+                </div>
+            </div>
+        </main>
+    </div>
+
+    <script src="../JavaScript/dashboard.js"></script>
+</body>
+</html>

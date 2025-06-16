@@ -1,0 +1,132 @@
+推荐模块日志：
+2025-06-14 21:03:31.832  INFO 17948 --- [nio-9040-exec-7] o.e.clouddemo.config.TokenInterceptor    : method:POST,请求url:/api/app/recommend/refresh,uuid:null,jwt-token:eyJhbGciOiJIUzI1NiJ9.eyJqdGkiOiI5NTY4OWY2ZS1lZjc5LTRjYmEtOTFhMi1mMTNlMDNiNDI5MzQiLCJzdWIiOiJ7XCJpZFwiOjE5MzMxODYyMjQxNzI3ODk3NjAsXCJsb2dpblR5cGVcIjpcInB3ZFwiLFwidXNlck5hbWVcIjpcImx2ZWR5XCIsXCJ1c2VyVHlwZVwiOlwiYXBwXCIsXCJ1dWlkXCI6XCI5NTY4OWY2ZS1lZjc5LTRjYmEtOTFhMi1mMTNlMDNiNDI5MzRcIn0iLCJpYXQiOjE3NDk5MDYxOTUsImV4cCI6MTc1MDE2NTM5NSwicm9sZXMiOiJ1c2VyIiwidHlwZSI6ImFwcCJ9.ZfTVAWOl8L6x1d22PcC1m5yLh0esnjF01RsD3xq9m50
+2025-06-14 21:03:31.833  INFO 17948 --- [nio-9040-exec-7] org.example.common.auth.TokenService     : 从token的jwt获取uuid=95689f6e-ef79-4cba-91a2-f13e03b42934
+2025-06-14 21:03:31.835  INFO 17948 --- [nio-9040-exec-7] o.e.c.c.app.RecommendController          : 开始刷新推荐，token: eyJhbGciOiJIUzI1NiJ9.eyJqdGkiOiI5NTY4OWY2ZS1lZjc5LTRjYmEtOTFhMi1mMTNlMDNiNDI5MzQiLCJzdWIiOiJ7XCJpZFwiOjE5MzMxODYyMjQxNzI3ODk3NjAsXCJsb2dpblR5cGVcIjpcInB3ZFwiLFwidXNlck5hbWVcIjpcImx2ZWR5XCIsXCJ1c2VyVHlwZVwiOlwiYXBwXCIsXCJ1dWlkXCI6XCI5NTY4OWY2ZS1lZjc5LTRjYmEtOTFhMi1mMTNlMDNiNDI5MzRcIn0iLCJpYXQiOjE3NDk5MDYxOTUsImV4cCI6MTc1MDE2NTM5NSwicm9sZXMiOiJ1c2VyIiwidHlwZSI6ImFwcCJ9.ZfTVAWOl8L6x1d22PcC1m5yLh0esnjF01RsD3xq9m50
+2025-06-14 21:03:31.836  INFO 17948 --- [nio-9040-exec-7] o.e.c.c.app.RecommendController          : 通过Feign调用订单服务获取订单列表，token: eyJhbGciOiJIUzI1NiJ9.eyJqdGkiOiI5NTY4OWY2ZS1lZjc5LTRjYmEtOTFhMi1mMTNlMDNiNDI5MzQiLCJzdWIiOiJ7XCJpZFwiOjE5MzMxODYyMjQxNzI3ODk3NjAsXCJsb2dpblR5cGVcIjpcInB3ZFwiLFwidXNlck5hbWVcIjpcImx2ZWR5XCIsXCJ1c2VyVHlwZVwiOlwiYXBwXCIsXCJ1dWlkXCI6XCI5NTY4OWY2ZS1lZjc5LTRjYmEtOTFhMi1mMTNlMDNiNDI5MzRcIn0iLCJpYXQiOjE3NDk5MDYxOTUsImV4cCI6MTc1MDE2NTM5NSwicm9sZXMiOiJ1c2VyIiwidHlwZSI6ImFwcCJ9.ZfTVAWOl8L6x1d22PcC1m5yLh0esnjF01RsD3xq9m50
+2025-06-14 21:03:31.855  INFO 17948 --- [nio-9040-exec-7] o.e.c.c.app.RecommendController          : 成功获取订单列表，数量: 3
+2025-06-14 21:03:31.856  INFO 17948 --- [nio-9040-exec-7] o.e.c.c.app.RecommendController          : 价格统计 - 平均数: 33.67, 标准差: 23.10
+2025-06-14 21:03:31.856  INFO 17948 --- [nio-9040-exec-7] o.e.c.c.app.RecommendController          : 价格查询范围: 10 - 57
+2025-06-14 21:03:31.856  INFO 17948 --- [nio-9040-exec-7] o.e.c.c.app.RecommendController          : 通过Feign调用产品服务查询产品，价格范围: 10-57
+2025-06-14 21:03:31.857  INFO 17948 --- [nio-9040-exec-7] o.e.c.c.app.RecommendController          : 请求参数: ProductListParamDTO(id=null, productName=null, productImg=null, startPrice=10, endPrice=57, productDesc=null, sortIndex=null, enableFlag=null)
+2025-06-14 21:03:31.881 ERROR 17948 --- [nio-9040-exec-7] o.e.c.c.app.RecommendController          : 根据价格范围查询产品失败，价格范围：10-57
+
+feign.codec.DecodeException: Type definition error: [simple type, class com.baomidou.mybatisplus.core.metadata.IPage]; nested exception is com.fasterxml.jackson.databind.exc.InvalidDefinitionException: Cannot construct instance of `com.baomidou.mybatisplus.core.metadata.IPage` (no Creators, like default constructor, exist): abstract types either need to be mapped to concrete types, have custom deserializer, or contain additional type information
+ at [Source: (PushbackInputStream); line: 1, column: 18] (through reference chain: org.example.common.response.ApiResult["data"])
+	at feign.AsyncResponseHandler.decode(AsyncResponseHandler.java:119) ~[feign-core-10.12.jar:na]
+	at feign.AsyncResponseHandler.handleResponse(AsyncResponseHandler.java:87) ~[feign-core-10.12.jar:na]
+	at feign.SynchronousMethodHandler.executeAndDecode(SynchronousMethodHandler.java:138) ~[feign-core-10.12.jar:na]
+	at feign.SynchronousMethodHandler.invoke(SynchronousMethodHandler.java:89) ~[feign-core-10.12.jar:na]
+	at feign.ReflectiveFeign$FeignInvocationHandler.invoke(ReflectiveFeign.java:100) ~[feign-core-10.12.jar:na]
+	at jdk.proxy2/jdk.proxy2.$Proxy120.getProductList(Unknown Source) ~[na:na]
+	at org.example.clouddemo.controller.app.RecommendController.getProductsByPriceRange(RecommendController.java:168) ~[classes/:na]
+	at org.example.clouddemo.controller.app.RecommendController.refreshRecommend(RecommendController.java:85) ~[classes/:na]
+	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke0(Native Method) ~[na:na]
+	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:77) ~[na:na]
+	at java.base/jdk.internal.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43) ~[na:na]
+	at java.base/java.lang.reflect.Method.invoke(Method.java:569) ~[na:na]
+	at org.springframework.web.method.support.InvocableHandlerMethod.doInvoke(InvocableHandlerMethod.java:190) ~[spring-web-5.2.15.RELEASE.jar:5.2.15.RELEASE]
+	at org.springframework.web.method.support.InvocableHandlerMethod.invokeForRequest(InvocableHandlerMethod.java:138) ~[spring-web-5.2.15.RELEASE.jar:5.2.15.RELEASE]
+	at org.springframework.web.servlet.mvc.method.annotation.ServletInvocableHandlerMethod.invokeAndHandle(ServletInvocableHandlerMethod.java:105) ~[spring-webmvc-5.2.15.RELEASE.jar:5.2.15.RELEASE]
+	at org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerAdapter.invokeHandlerMethod(RequestMappingHandlerAdapter.java:878) ~[spring-webmvc-5.2.15.RELEASE.jar:5.2.15.RELEASE]
+	at org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerAdapter.handleInternal(RequestMappingHandlerAdapter.java:792) ~[spring-webmvc-5.2.15.RELEASE.jar:5.2.15.RELEASE]
+	at org.springframework.web.servlet.mvc.method.AbstractHandlerMethodAdapter.handle(AbstractHandlerMethodAdapter.java:87) ~[spring-webmvc-5.2.15.RELEASE.jar:5.2.15.RELEASE]
+	at org.springframework.web.servlet.DispatcherServlet.doDispatch(DispatcherServlet.java:1040) ~[spring-webmvc-5.2.15.RELEASE.jar:5.2.15.RELEASE]
+	at org.springframework.web.servlet.DispatcherServlet.doService(DispatcherServlet.java:943) ~[spring-webmvc-5.2.15.RELEASE.jar:5.2.15.RELEASE]
+	at org.springframework.web.servlet.FrameworkServlet.processRequest(FrameworkServlet.java:1006) ~[spring-webmvc-5.2.15.RELEASE.jar:5.2.15.RELEASE]
+	at org.springframework.web.servlet.FrameworkServlet.doPost(FrameworkServlet.java:909) ~[spring-webmvc-5.2.15.RELEASE.jar:5.2.15.RELEASE]
+	at javax.servlet.http.HttpServlet.service(HttpServlet.java:652) ~[tomcat-embed-core-9.0.46.jar:4.0.FR]
+	at org.springframework.web.servlet.FrameworkServlet.service(FrameworkServlet.java:883) ~[spring-webmvc-5.2.15.RELEASE.jar:5.2.15.RELEASE]
+	at javax.servlet.http.HttpServlet.service(HttpServlet.java:733) ~[tomcat-embed-core-9.0.46.jar:4.0.FR]
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:227) ~[tomcat-embed-core-9.0.46.jar:9.0.46]
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:162) ~[tomcat-embed-core-9.0.46.jar:9.0.46]
+	at org.apache.tomcat.websocket.server.WsFilter.doFilter(WsFilter.java:53) ~[tomcat-embed-websocket-9.0.46.jar:9.0.46]
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:189) ~[tomcat-embed-core-9.0.46.jar:9.0.46]
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:162) ~[tomcat-embed-core-9.0.46.jar:9.0.46]
+	at com.github.xiaoymin.knife4j.spring.filter.SecurityBasicAuthFilter.doFilter(SecurityBasicAuthFilter.java:87) ~[knife4j-spring-2.0.7.jar:na]
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:189) ~[tomcat-embed-core-9.0.46.jar:9.0.46]
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:162) ~[tomcat-embed-core-9.0.46.jar:9.0.46]
+	at org.springframework.web.filter.RequestContextFilter.doFilterInternal(RequestContextFilter.java:100) ~[spring-web-5.2.15.RELEASE.jar:5.2.15.RELEASE]
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:119) ~[spring-web-5.2.15.RELEASE.jar:5.2.15.RELEASE]
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:189) ~[tomcat-embed-core-9.0.46.jar:9.0.46]
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:162) ~[tomcat-embed-core-9.0.46.jar:9.0.46]
+	at org.springframework.web.filter.FormContentFilter.doFilterInternal(FormContentFilter.java:93) ~[spring-web-5.2.15.RELEASE.jar:5.2.15.RELEASE]
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:119) ~[spring-web-5.2.15.RELEASE.jar:5.2.15.RELEASE]
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:189) ~[tomcat-embed-core-9.0.46.jar:9.0.46]
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:162) ~[tomcat-embed-core-9.0.46.jar:9.0.46]
+	at org.springframework.web.filter.CharacterEncodingFilter.doFilterInternal(CharacterEncodingFilter.java:201) ~[spring-web-5.2.15.RELEASE.jar:5.2.15.RELEASE]
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:119) ~[spring-web-5.2.15.RELEASE.jar:5.2.15.RELEASE]
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:189) ~[tomcat-embed-core-9.0.46.jar:9.0.46]
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:162) ~[tomcat-embed-core-9.0.46.jar:9.0.46]
+	at org.apache.catalina.core.StandardWrapperValve.invoke(StandardWrapperValve.java:202) ~[tomcat-embed-core-9.0.46.jar:9.0.46]
+	at org.apache.catalina.core.StandardContextValve.invoke(StandardContextValve.java:97) ~[tomcat-embed-core-9.0.46.jar:9.0.46]
+	at org.apache.catalina.authenticator.AuthenticatorBase.invoke(AuthenticatorBase.java:542) ~[tomcat-embed-core-9.0.46.jar:9.0.46]
+	at org.apache.catalina.core.StandardHostValve.invoke(StandardHostValve.java:143) ~[tomcat-embed-core-9.0.46.jar:9.0.46]
+	at org.apache.catalina.valves.ErrorReportValve.invoke(ErrorReportValve.java:92) ~[tomcat-embed-core-9.0.46.jar:9.0.46]
+	at org.apache.catalina.core.StandardEngineValve.invoke(StandardEngineValve.java:78) ~[tomcat-embed-core-9.0.46.jar:9.0.46]
+	at org.apache.catalina.connector.CoyoteAdapter.service(CoyoteAdapter.java:357) ~[tomcat-embed-core-9.0.46.jar:9.0.46]
+	at org.apache.coyote.http11.Http11Processor.service(Http11Processor.java:374) ~[tomcat-embed-core-9.0.46.jar:9.0.46]
+	at org.apache.coyote.AbstractProcessorLight.process(AbstractProcessorLight.java:65) ~[tomcat-embed-core-9.0.46.jar:9.0.46]
+	at org.apache.coyote.AbstractProtocol$ConnectionHandler.process(AbstractProtocol.java:893) ~[tomcat-embed-core-9.0.46.jar:9.0.46]
+	at org.apache.tomcat.util.net.NioEndpoint$SocketProcessor.doRun(NioEndpoint.java:1707) ~[tomcat-embed-core-9.0.46.jar:9.0.46]
+	at org.apache.tomcat.util.net.SocketProcessorBase.run(SocketProcessorBase.java:49) ~[tomcat-embed-core-9.0.46.jar:9.0.46]
+	at java.base/java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1136) ~[na:na]
+	at java.base/java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:635) ~[na:na]
+	at org.apache.tomcat.util.threads.TaskThread$WrappingRunnable.run(TaskThread.java:61) ~[tomcat-embed-core-9.0.46.jar:9.0.46]
+	at java.base/java.lang.Thread.run(Thread.java:840) ~[na:na]
+Caused by: org.springframework.http.converter.HttpMessageConversionException: Type definition error: [simple type, class com.baomidou.mybatisplus.core.metadata.IPage]; nested exception is com.fasterxml.jackson.databind.exc.InvalidDefinitionException: Cannot construct instance of `com.baomidou.mybatisplus.core.metadata.IPage` (no Creators, like default constructor, exist): abstract types either need to be mapped to concrete types, have custom deserializer, or contain additional type information
+ at [Source: (PushbackInputStream); line: 1, column: 18] (through reference chain: org.example.common.response.ApiResult["data"])
+	at org.springframework.http.converter.json.AbstractJackson2HttpMessageConverter.readJavaType(AbstractJackson2HttpMessageConverter.java:282) ~[spring-web-5.2.15.RELEASE.jar:5.2.15.RELEASE]
+	at org.springframework.http.converter.json.AbstractJackson2HttpMessageConverter.read(AbstractJackson2HttpMessageConverter.java:243) ~[spring-web-5.2.15.RELEASE.jar:5.2.15.RELEASE]
+	at org.springframework.web.client.HttpMessageConverterExtractor.extractData(HttpMessageConverterExtractor.java:105) ~[spring-web-5.2.15.RELEASE.jar:5.2.15.RELEASE]
+	at org.springframework.cloud.openfeign.support.SpringDecoder.decode(SpringDecoder.java:59) ~[spring-cloud-openfeign-core-2.2.9.RELEASE.jar:2.2.9.RELEASE]
+	at org.springframework.cloud.openfeign.support.ResponseEntityDecoder.decode(ResponseEntityDecoder.java:62) ~[spring-cloud-openfeign-core-2.2.9.RELEASE.jar:2.2.9.RELEASE]
+	at feign.optionals.OptionalDecoder.decode(OptionalDecoder.java:36) ~[feign-core-10.12.jar:na]
+	at feign.AsyncResponseHandler.decode(AsyncResponseHandler.java:115) ~[feign-core-10.12.jar:na]
+	... 60 common frames omitted
+Caused by: com.fasterxml.jackson.databind.exc.InvalidDefinitionException: Cannot construct instance of `com.baomidou.mybatisplus.core.metadata.IPage` (no Creators, like default constructor, exist): abstract types either need to be mapped to concrete types, have custom deserializer, or contain additional type information
+ at [Source: (PushbackInputStream); line: 1, column: 18] (through reference chain: org.example.common.response.ApiResult["data"])
+	at com.fasterxml.jackson.databind.exc.InvalidDefinitionException.from(InvalidDefinitionException.java:67) ~[jackson-databind-2.11.4.jar:2.11.4]
+	at com.fasterxml.jackson.databind.DeserializationContext.reportBadDefinition(DeserializationContext.java:1615) ~[jackson-databind-2.11.4.jar:2.11.4]
+	at com.fasterxml.jackson.databind.DatabindContext.reportBadDefinition(DatabindContext.java:400) ~[jackson-databind-2.11.4.jar:2.11.4]
+	at com.fasterxml.jackson.databind.DeserializationContext.handleMissingInstantiator(DeserializationContext.java:1077) ~[jackson-databind-2.11.4.jar:2.11.4]
+	at com.fasterxml.jackson.databind.deser.AbstractDeserializer.deserialize(AbstractDeserializer.java:265) ~[jackson-databind-2.11.4.jar:2.11.4]
+	at com.fasterxml.jackson.databind.deser.impl.FieldProperty.deserializeAndSet(FieldProperty.java:138) ~[jackson-databind-2.11.4.jar:2.11.4]
+	at com.fasterxml.jackson.databind.deser.BeanDeserializer.deserializeFromObject(BeanDeserializer.java:371) ~[jackson-databind-2.11.4.jar:2.11.4]
+	at com.fasterxml.jackson.databind.deser.BeanDeserializer.deserialize(BeanDeserializer.java:164) ~[jackson-databind-2.11.4.jar:2.11.4]
+	at com.fasterxml.jackson.databind.ObjectMapper._readMapAndClose(ObjectMapper.java:4526) ~[jackson-databind-2.11.4.jar:2.11.4]
+	at com.fasterxml.jackson.databind.ObjectMapper.readValue(ObjectMapper.java:3521) ~[jackson-databind-2.11.4.jar:2.11.4]
+	at org.springframework.http.converter.json.AbstractJackson2HttpMessageConverter.readJavaType(AbstractJackson2HttpMessageConverter.java:274) ~[spring-web-5.2.15.RELEASE.jar:5.2.15.RELEASE]
+	... 66 common frames omitted
+
+2025-06-14 21:03:31.882  INFO 17948 --- [nio-9040-exec-7] o.e.c.c.app.RecommendController          : 推荐完成，返回0个产品
+
+订单模块日志：
+Creating a new SqlSession
+SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@65e4362] was not registered for synchronization because synchronization is not active
+JDBC Connection [com.alibaba.druid.proxy.jdbc.ConnectionProxyImpl@673c6b5] will not be managed by Spring
+==>  Preparing: SELECT order_id AS id,user_id,product_id,user_name,product_name,product_quantity AS quantity,order_price AS amount,is_completed AS status,create_time,update_time FROM orders WHERE (user_id = ?) ORDER BY create_time DESC
+==> Parameters: 1933186224172789760(Long)
+<==    Columns: id, user_id, product_id, user_name, product_name, quantity, amount, status, create_time, update_time
+<==        Row: 7, 1933186224172789760, 1933208472178917376, lvedy, 50元人民币, 1, 50.00, 0, 2025-06-14 01:59:17.7320000, 2025-06-14 01:59:17.7320000
+<==        Row: 5, 1933186224172789760, 1933208472178917376, lvedy, 50元人民币, 10, 500.00, 1, 2025-06-14 00:32:51.1360000, 2025-06-14 01:59:00.4450000
+<==      Total: 2
+Closing non transactional SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@65e4362]
+2025-06-14 15:38:12.267 [http-nio-9030-exec-2] INFO  o.example.clouddemo.service.impl.OrderServiceImpl - 查询到用户1933186224172789760的订单数量: 2
+
+产品模块日志：
+2025-06-14 15:38:12.282  INFO 12744 --- [nio-9020-exec-3] o.e.clouddemo.config.TokenInterceptor    : method:POST,请求url:/api/app/product/list/1/100,uuid:null,jwt-token:null
+Creating a new SqlSession
+SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@6138c8a2] was not registered for synchronization because synchronization is not active
+JDBC Connection [com.alibaba.druid.proxy.jdbc.ConnectionProxyImpl@3c121899] will not be managed by Spring
+==>  Preparing: SELECT COUNT(*) AS total FROM t_product WHERE (price >= ? AND price <= ?)
+==> Parameters: 50(BigDecimal), 150(BigDecimal)
+<==    Columns: total
+<==        Row: 2
+<==      Total: 1
+==>  Preparing: SELECT id,product_name,product_img,price,product_desc,sort_index,enable_flag,create_time,update_time FROM t_product WHERE (price >= ? AND price <= ?) ORDER BY create_time DESC OFFSET ? ROWS FETCH NEXT ? ROWS ONLY
+==> Parameters: 50(BigDecimal), 150(BigDecimal), 0(Long), 100(Long)
+<==    Columns: id, product_name, product_img, price, product_desc, sort_index, enable_flag, create_time, update_time
+<==        Row: 1933208472178917376, 50元人民币, 无, 50.00, 50块钱, 1, 1, 2025-06-13 01:03:11.7233333, 2025-06-13 01:03:11.7233333
+<==        Row: 1933208199935033344, 100元人民币, 无, 100.00, 100块钱, 0, 1, 2025-06-13 01:02:06.8133333, 2025-06-13 01:02:06.8133333
+<==      Total: 2
+Closing non transactional SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@6138c8a2]

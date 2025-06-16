@@ -1,0 +1,59 @@
+server:
+  port: 9040
+  #使用gzip压缩
+  compression:
+    enabled: true
+    mime-types: application/json,application/xml,text/html,text/xml,text/plain,text/css,application/javascript,application/x-javascript,image/svg+xml
+    min-response-size: 1024
+spring:
+  application:
+    name: service-recommend
+  cloud:
+    nacos:
+      # Nacos Config 配置项，对应 NacosConfigProperties 配置属性类
+      config:
+        server-addr: localhost:8848 # Nacos 服务器地址
+        namespace:  # 使用的 Nacos 的命名空间，默认为 null
+      discovery:
+        server-addr: localhost:8848 # Nacos 服务器地址
+        namespace:  # 使用的 Nacos 的命名空间，默认为 null
+        register-enabled: true # 是否注册到Nacos
+        group: DEFAULT_GROUP # 使用的 Nacos 服务分组，默认为 DEFAULT_GROUP
+
+
+  # 推荐微服务暂时不需要数据库连接
+  # 如需要可以后续添加
+
+logging:
+  config: classpath:logback/logback-prod.xml  # 使用生产环境的配置
+  level:
+    org.example.clouddemo: DEBUG
+
+log:
+  path: /home/appDir/service/logs  # log4j2 日志保存路径
+  name: service-recommend # log4j2 日志名称
+
+
+# snowflake配置 - ID生成器
+snowflake:
+  datacenterId: 1  # 数据中心ID (0-31)
+  workerId: 1      # 工作机器ID (0-31)
+
+
+
+
+#接口文档
+knife4j:
+  enable: true
+  # 开启Swagger的Basic认证功能,默认是false
+  basic:
+    enable: true
+    # Basic认证用户名
+    username: admin
+    # Basic认证密码
+    password: gemo2273
+  documents:
+    - group: app接口
+      name: api接口文档说明
+      # 某一个文件夹下所有的.md文件
+      locations: classpath:markdown/*

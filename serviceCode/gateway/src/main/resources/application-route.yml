@@ -1,0 +1,50 @@
+spring:
+  cloud:
+    gateway:
+      routes:
+        # 路由1：用户服务路由
+        - id: service-user
+          uri: lb://service-user
+          predicates:
+            - Path=/api-service-user/**
+          filters:
+            - RewritePath=/api-service-user/(?<segment>.*), /$\{segment}  # 重写路由, 使用**
+            - name: Authorization
+              args:
+                excludedPaths:
+                  - /api/app/user/register
+                  - /api/app/user/login
+        
+        # 路由2：产品服务路由
+        - id: service-product
+          uri: lb://service-product
+          predicates:
+            - Path=/api-service-product/**
+          filters:
+            - RewritePath=/api-service-product/(?<segment>.*), /$\{segment}  # 重写路由
+            - name: Authorization
+              args:
+                excludedPaths: []
+        
+        # 路由3：订单服务路由
+        - id: service-order
+          uri: lb://service-order
+          predicates:
+            - Path=/api-service-order/**
+          filters:
+            - RewritePath=/api-service-order/(?<segment>.*), /$\{segment}  # 重写路由
+            - name: Authorization
+              args:
+                excludedPaths: []
+        
+        # 路由4：推荐服务路由
+        - id: service-recommend
+          uri: lb://service-recommend
+          predicates:
+            - Path=/api-service-recommend/**
+          filters:
+            - RewritePath=/api-service-recommend/(?<segment>.*), /$\{segment}  # 重写路由
+            - name: Authorization
+              args:
+                excludedPaths: []
+

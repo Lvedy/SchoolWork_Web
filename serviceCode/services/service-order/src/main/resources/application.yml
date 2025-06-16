@@ -1,0 +1,110 @@
+server:
+  port: 9030
+  #使用gzip压缩
+  compression:
+    enabled: true
+    mime-types: application/json,application/xml,text/html,text/xml,text/plain,text/css,application/javascript,application/x-javascript,image/svg+xml
+    min-response-size: 1024
+spring:
+  application:
+    name: service-order
+  cloud:
+    nacos:
+      # Nacos Config 配置项，对应 NacosConfigProperties 配置属性类
+      config:
+        server-addr: localhost:8848 # Nacos 服务器地址
+        namespace:  # 使用的 Nacos 的命名空间，默认为 null
+      discovery:
+        server-addr: localhost:8848 # Nacos 服务器地址
+        namespace:  # 使用的 Nacos 的命名空间，默认为 null
+        register-enabled: true # 是否注册到Nacos
+        group: DEFAULT_GROUP # 使用的 Nacos 服务分组，默认为 DEFAULT_GROUP
+
+  datasource: #数据源配置
+    dynamic:
+      primary: master
+      # 严格匹配数据源,默认false.true未匹配到指定数据源时抛异常,false使用默认数据源
+      strict: false
+      datasource:
+        master:
+          #    driver-class-name: com.mysql.jdbc.Driver
+          driver-class-name: com.microsoft.sqlserver.jdbc.SQLServerDriver #SQL Server驱动
+          type: com.alibaba.druid.pool.DruidDataSource  #要使用的连接池实现的完全限定名称。默认情况下，它是从类路径自动检测的。
+          url: jdbc:sqlserver://111.161.121.11:29772;databaseName=lvedy;encrypt=false;trustServerCertificate=true
+          username: sa
+          password: lxlx.826
+
+  redis:
+    #正式环境是 0 ,本地开发使用1,避免影响正式环境
+    database: 0
+    host: localhost
+    port: 6379
+    password:  #密码（默认为空
+    #   auth: xx #密码（默认为空
+    timeout: 6000 #连接超时时长（毫秒）
+    jedis:
+      pool:
+        max-active: 1000 #连接池最大连接数（使用负值表示没有限制）
+        max-wait: -1 #连接池最大阻塞等待时间（使用负值表示没有限制）
+        max-idle: 10 #连接池中的最大空闲连接
+        min-idle: 5 #连接池中的最小空闲连接
+
+# MyBatis Plus 配置
+mybatis-plus:
+  mapper-locations: classpath*:/mapper/**/*.xml
+  #实体扫描，多个package用逗号或者分号分隔
+  typeAliasesPackage: org.example.clouddemo.bean
+  global-config:
+    db-config:
+      id-type: auto
+      field-strategy: not_empty
+      table-underline: true
+      db-type: sqlserver
+      logic-delete-value: 1 # 逻辑已删除值(默认为 1)
+      logic-not-delete-value: 0 # 逻辑未删除值(默认为 0)
+  configuration:
+    map-underscore-to-camel-case: true
+    cache-enabled: false
+    call-setters-on-nulls: true
+    log-impl: org.apache.ibatis.logging.stdout.StdOutImpl
+
+# Swagger配置
+knife4j:
+  enable: true
+  basic:
+    enable: false
+    username: admin
+    password: 123456
+  setting:
+    enableFooter: false
+    enableFooterCustom: true
+    footerCustomContent: 订单微服务接口文档
+    enableSwaggerModels: true
+    swaggerModelName: 实体类列表
+
+# Feign配置
+feign:
+  client:
+    config:
+      default:
+        connectTimeout: 5000
+        readTimeout: 5000
+  httpclient:
+    enabled: true
+    max-connections: 200
+    max-connections-per-route: 50
+
+# Snowflake配置
+snowflake:
+  workerId: 0  # 终端ID 0~31
+  datacenterId: 0  # 数据中心ID 0~31
+
+# 日志配置
+logging:
+  config: classpath:logback/logback-prod.xml  # 使用生产环境的配置
+  level:
+    root: info
+    org.example.clouddemo: debug
+  file:
+    path: /home/appDir/service/logs  # log4j2 日志保存路径
+    name: app # log4j2 日志名称
