@@ -79,15 +79,20 @@ public class SimpleWebServer {
         @Override
         public void handle(HttpExchange exchange) throws IOException {
             String path = exchange.getRequestURI().getPath();
-            String fileName = path.substring(path.lastIndexOf('/') + 1);
             
-            // 构建文件路径
-            Path filePath = Paths.get(WEB_ROOT, directory, fileName);
+            // 移除前缀路径，获取相对于目录的路径
+            String relativePath = path.substring(("/" + directory).length());
+            if (relativePath.startsWith("/")) {
+                relativePath = relativePath.substring(1);
+            }
+            
+            // 构建文件路径，支持子目录
+            Path filePath = Paths.get(WEB_ROOT, directory, relativePath);
             File file = filePath.toFile();
             
             if (!file.exists() || file.isDirectory()) {
                 // 文件不存在，返回404
-                String notFoundResponse = "<!DOCTYPE html><html><head><meta charset='UTF-8'><title>404 - 文件未找到</title></head><body><h1>404 - 文件未找到</h1><p>文件 " + fileName + " 不存在</p></body></html>";
+                String notFoundResponse = "<!DOCTYPE html><html><head><meta charset='UTF-8'><title>404 - 文件未找到</title></head><body><h1>404 - 文件未找到</h1><p>文件 " + relativePath + " 不存在</p></body></html>";
                 exchange.getResponseHeaders().set("Content-Type", "text/html; charset=UTF-8");
                 exchange.sendResponseHeaders(404, notFoundResponse.getBytes("UTF-8").length);
                 OutputStream os = exchange.getResponseBody();
@@ -97,7 +102,7 @@ public class SimpleWebServer {
             }
             
             // 设置Content-Type
-            String contentType = getContentType(fileName);
+            String contentType = getContentType(relativePath);
             exchange.getResponseHeaders().set("Content-Type", contentType);
             
             // 读取并发送文件

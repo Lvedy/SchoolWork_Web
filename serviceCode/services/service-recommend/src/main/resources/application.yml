@@ -19,7 +19,20 @@ spring:
         namespace:  # 使用的 Nacos 的命名空间，默认为 null
         register-enabled: true # 是否注册到Nacos
         group: DEFAULT_GROUP # 使用的 Nacos 服务分组，默认为 DEFAULT_GROUP
-
+  redis:
+    #正式环境是 0 ,本地开发使用1,避免影响正式环境
+    database: 0
+    host: 122.246.0.213
+    port: 40044
+    password:  #密码（默认为空
+    #   auth: xx #密码（默认为空
+    timeout: 6000 #连接超时时长（毫秒）
+    jedis:
+      pool:
+        max-active: 1000 #连接池最大连接数（使用负值表示没有限制）
+        max-wait: -1 #连接池最大阻塞等待时间（使用负值表示没有限制）
+        max-idle: 10 #连接池中的最大空闲连接
+        min-idle: 5 #连接池中的最小空闲连接
 
   # 推荐微服务暂时不需要数据库连接
   # 如需要可以后续添加

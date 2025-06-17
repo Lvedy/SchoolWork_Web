@@ -187,7 +187,7 @@ function loginUser(username, password) {
     };
     
     // 发送登录请求到网关
-    return fetch('http://localhost:9027/api-service-user/api/app/user/login', {
+    return fetch('http://hbe.vanmc.cn:19198/api-service-user/api/app/user/login', {
         method: 'POST',
         headers: {
             'Content-Type': 'application/json',

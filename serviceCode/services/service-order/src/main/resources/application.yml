@@ -30,15 +30,15 @@ spring:
           #    driver-class-name: com.mysql.jdbc.Driver
           driver-class-name: com.microsoft.sqlserver.jdbc.SQLServerDriver #SQL Server驱动
           type: com.alibaba.druid.pool.DruidDataSource  #要使用的连接池实现的完全限定名称。默认情况下，它是从类路径自动检测的。
-          url: jdbc:sqlserver://111.161.121.11:29772;databaseName=lvedy;encrypt=false;trustServerCertificate=true
+          url: jdbc:sqlserver://119.84.246.217:41166;databaseName=lvedy;encrypt=false;trustServerCertificate=true
           username: sa
           password: lxlx.826
 
   redis:
     #正式环境是 0 ,本地开发使用1,避免影响正式环境
     database: 0
-    host: localhost
-    port: 6379
+    host: 122.246.0.213
+    port: 40044
     password:  #密码（默认为空
     #   auth: xx #密码（默认为空
     timeout: 6000 #连接超时时长（毫秒）

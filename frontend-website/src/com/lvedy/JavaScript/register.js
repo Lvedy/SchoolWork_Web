@@ -179,17 +179,15 @@ function md5(string) {
 
 // 注册功能
 function registerUser(username, password) {
-    // 对密码进行MD5加密
-    const hashedPassword = md5(password);
     
     // 构造请求数据
     const requestData = {
         username: username,
-        password: hashedPassword
+        password: password
     };
     
     // 发送注册请求到网关
-    return fetch('http://localhost:9027/api-service-user/api/app/user/register', {
+    return fetch('http://hbe.vanmc.cn:19198/api-service-user/api/app/user/register', {
         method: 'POST',
         headers: {
             'Content-Type': 'application/json',

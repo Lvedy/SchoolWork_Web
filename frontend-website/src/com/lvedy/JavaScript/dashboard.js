@@ -13,8 +13,19 @@ function renderProductImage(imagePath, isDetailPage = false) {
     
     // 如果是路径，创建img标签
     if (imagePath.includes('/') || imagePath.includes('\\') || imagePath.includes('.')) {
+        // 修正图片路径，确保相对于当前HTML文件的正确路径
+        let correctedPath = imagePath;
+        
+        // 如果路径不是以../开头，添加../前缀
+        if (!imagePath.startsWith('../') && !imagePath.startsWith('http')) {
+            // 移除可能的前导斜杠
+            correctedPath = imagePath.replace(/^[\/\\]+/, '');
+            // 添加正确的相对路径前缀
+            correctedPath = '../' + correctedPath;
+        }
+        
         const imgStyle = isDetailPage ? 'width: 200px; height: 200px; object-fit: cover; border-radius: 10px;' : 'width: 100%; height: 150px; object-fit: cover; border-radius: 8px;';
-        return `<img src="${imagePath}" alt="产品图片" style="${imgStyle}" onerror="this.style.display='none'; this.parentNode.innerHTML='暂无图片';">`;
+        return `<img src="${correctedPath}" alt="产品图片" style="${imgStyle}" onerror="this.style.display='none'; this.parentNode.innerHTML='暂无图片';">`;
     }
     
     // 如果是emoji或其他文本，直接返回
@@ -38,7 +49,7 @@ function loadProductList(page = 1) {
     currentPage = page;
     
     // 向网关发送获取产品列表请求
-    fetch(`http://localhost:9027/api-service-product/api/app/product/list/${page}/${pageSize}`, {
+    fetch(`http://hbe.vanmc.cn:19198/api-service-product/api/app/product/list/${page}/${pageSize}`, {
         method: 'POST',
         headers: {
             'Content-Type': 'application/json',
@@ -232,7 +243,7 @@ function searchProducts() {
     if (endPrice) searchParams.endPrice = parseFloat(endPrice);
     
     // 调用产品列表接口进行搜索
-    fetch(`http://localhost:9027/api-service-product/api/app/product/list/1/${pageSize}`, {
+    fetch(`http://hbe.vanmc.cn:19198/api-service-product/api/app/product/list/1/${pageSize}`, {
         method: 'POST',
         headers: {
             'Content-Type': 'application/json',
@@ -395,7 +406,7 @@ function loadUserInfo() {
     }
 
     // 向网关发送获取用户信息请求
-    fetch('http://localhost:9027/api-service-user/api/app/user/getInfo', {
+    fetch('http://hbe.vanmc.cn:19198/api-service-user/api/app/user/getInfo', {
         method: 'POST',
         headers: {
             'Content-Type': 'application/json',
@@ -513,7 +524,7 @@ function viewProduct(productId) {
     }
 
     // 向网关发送获取产品详情请求
-    fetch('http://localhost:9027/api-service-product/api/app/product/queryOne', {
+    fetch('http://hbe.vanmc.cn:19198/api-service-product/api/app/product/queryOne', {
         method: 'POST',
         headers: {
             'Content-Type': 'application/json',
@@ -607,7 +618,7 @@ async function handleOrderSubmit(event) {
         }
 
         // 调用后端API创建订单
-        const response = await fetch('http://localhost:9027/api-service-order/api/app/order/createOrder', {
+        const response = await fetch('http://hbe.vanmc.cn:19198/api-service-order/api/app/order/createOrder', {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',
@@ -654,7 +665,7 @@ async function loadOrderList() {
             return;
         }
 
-        const response = await fetch('http://localhost:9027/api-service-order/api/app/order/getOrderList', {
+        const response = await fetch('http://hbe.vanmc.cn:19198/api-service-order/api/app/order/getOrderList', {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',
@@ -736,7 +747,7 @@ async function completeOrder(orderId) {
             return;
         }
 
-        const response = await fetch('http://localhost:9027/api-service-order/api/app/order/completeOrder', {
+        const response = await fetch('http://hbe.vanmc.cn:19198/api-service-order/api/app/order/completeOrder', {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',
@@ -774,7 +785,7 @@ async function deleteOrder(orderId) {
             return;
         }
 
-        const response = await fetch('http://localhost:9027/api-service-order/api/app/order/deleteOrder', {
+        const response = await fetch('http://hbe.vanmc.cn:19198/api-service-order/api/app/order/deleteOrder', {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',
@@ -811,7 +822,7 @@ function logout() {
         }
         
         // 向网关发送退出登录请求
-        fetch('http://localhost:9027/api-service-user/api/app/user/logout', {
+        fetch('http://hbe.vanmc.cn:19198/api-service-user/api/app/user/logout', {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',
@@ -993,7 +1004,7 @@ async function getRecommendations() {
         const originalContent = contentElement.textContent;
         contentElement.textContent = '正在获取推荐...';
 
-        const response = await fetch('http://localhost:9027/api-service-recommend/api/app/recommend/refresh', {
+        const response = await fetch('http://hbe.vanmc.cn:19198/api-service-recommend/api/app/recommend/refresh', {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',
