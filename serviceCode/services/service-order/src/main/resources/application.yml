@@ -30,7 +30,7 @@ spring:
           #    driver-class-name: com.mysql.jdbc.Driver
           driver-class-name: com.microsoft.sqlserver.jdbc.SQLServerDriver #SQL Server驱动
           type: com.alibaba.druid.pool.DruidDataSource  #要使用的连接池实现的完全限定名称。默认情况下，它是从类路径自动检测的。
-          url: jdbc:sqlserver://119.84.246.217:41166;databaseName=lvedy;encrypt=false;trustServerCertificate=true
+          url: jdbc:sqlserver://localhost:11451;databaseName=lvedy;encrypt=false;trustServerCertificate=true
           username: sa
           password: lxlx.826
 
